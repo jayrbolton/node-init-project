@@ -2,7 +2,7 @@
 
 ```
 chmod +x ./node-init-project.sh
-./node-init-project.sh my-new-project
+./node-init-project.sh my-new-project "This is the description"
 ```
 
 This is a simple script I use to initialize a new npm module.

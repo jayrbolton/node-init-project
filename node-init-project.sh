@@ -1,17 +1,18 @@
 #!/bin/bash
 set -e
-project_name=$1
+project=$1
+desc=$2
 name="$(npm config get init.author.name)"
 email="$(npm config get init.author.email)"
-mkdir $project_name
-cd $project_name
+mkdir $project
+cd $project
 git init
 echo 'node_modules' > .gitignore
 cat > package.json <<- EOM
 {
-  "name": "$1project_name",
+  "name": "$project",
   "version": "0.0.1",
-  "description": "",
+  "description": "$desc",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -26,11 +27,11 @@ cat > package.json <<- EOM
   "license": "MIT"
 }
 EOM
-npm install --save-dev dependency-check standard tape
+npm install --save-dev dependency-check standard tape common-readme
 mkdir test
 touch test/index.js
 touch index.js
-echo "#$project_name" > README.md
+./node_modules/.bin/common-readme > README.md
 mkdir lib
 git add --all
 git commit -m "Initialize"
