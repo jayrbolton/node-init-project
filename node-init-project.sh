@@ -2,11 +2,13 @@
 set -e
 project=$1
 desc=$2
+github_name="$(npm config get init.author.github_name)"
 name="$(npm config get init.author.name)"
 email="$(npm config get init.author.email)"
 mkdir $project
 cd $project
 git init
+echo 'examples' > .npmignore
 echo 'node_modules' > .gitignore
 cat > package.json <<- EOM
 {
@@ -19,6 +21,13 @@ cat > package.json <<- EOM
   },
   "dependencies": {},
   "devDependencies": {},
+  "bugs": {
+    "url": "https://github.com/$github_name/$project/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/$github_name/$project.git"
+  },
   "scripts": {
     "test": "dependency-check package.json && standard && node test/"
   },
