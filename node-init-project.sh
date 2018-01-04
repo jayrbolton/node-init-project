@@ -29,7 +29,9 @@ cat > package.json <<- EOM
     "url": "https://github.com/$github_name/$project.git"
   },
   "scripts": {
-    "test": "dependency-check package.json && standard && node test/"
+    "test": "dependency-check package.json && standard && node test/",
+    "preversion": "npm run test",
+    "postversion": "git push && git push --tags"
   },
   "keywords": [],
   "author": "$name <$email>",
